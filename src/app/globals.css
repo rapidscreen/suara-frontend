@@ -26,7 +26,8 @@
 
 @font-face {
   font-family: "Neue Haas Grotesk Display Pro";
-  src: url("/fonts/neue-haas-grotesk-display-pro/NeueHaasGroteskDisplayPro-Regular.woff2") format("woff2"),
+  src:
+    url("/fonts/neue-haas-grotesk-display-pro/NeueHaasGroteskDisplayPro-Regular.woff2") format("woff2"),
     url("/fonts/neue-haas-grotesk-display-pro/NeueHaasGroteskDisplayPro-Regular.woff") format("woff");
   font-weight: 400;
   font-style: normal;
@@ -35,12 +36,26 @@
 
 @font-face {
   font-family: "Neue Haas Grotesk Display Pro";
-  src: url("/fonts/neue-haas-grotesk-display-pro/NeueHaasGroteskDisplayPro-Medium.woff2") format("woff2"),
+  src:
+    url("/fonts/neue-haas-grotesk-display-pro/NeueHaasGroteskDisplayPro-Medium.woff2") format("woff2"),
     url("/fonts/neue-haas-grotesk-display-pro/NeueHaasGroteskDisplayPro-Medium.woff") format("woff");
   font-weight: 500;
+  /* keep if this file is truly Medium */
   font-style: normal;
   font-display: swap;
 }
+
+@font-face {
+  font-family: "Neue Haas Grotesk Display Pro";
+  src:
+    url("/fonts/neue-haas-grotesk-display-pro/NeueHaasGroteskDisplayPro-Bold.woff2") format("woff2"),
+    url("/fonts/neue-haas-grotesk-display-pro/NeueHaasGroteskDisplayPro-Bold.woff") format("woff");
+  font-weight: 700;
+  /* << change to 700 for Bold */
+  font-style: normal;
+  font-display: swap;
+}
+
 
 :root {
   --background: #ffffff;
@@ -156,6 +171,10 @@ main {
   display: inline-flex;
   align-items: center;
   justify-content: center;
+}
+
+[role="log"] > div[style] {
+  overflow: hidden !important;
 }
 
 @media (max-width: 768px) {

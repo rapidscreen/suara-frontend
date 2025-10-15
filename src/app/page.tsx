@@ -1,6 +1,10 @@
 import Image from "next/image";
 import styles from "./page.module.css";
 import { ScrollingWaveform, StaticWaveform } from "@/components/ui/waveform";
+import { cn } from "@/lib/utils";
+import { GridPattern } from "@/components/ui/shadcn-io/grid-pattern";
+import { BackgroundPaths } from "@/components/ui/shadcn-io/background-paths";
+import ConversationDemo from "@/components/ui/conversation-demo/conversation-demo";
 
 export default function Home() {
   return (
@@ -103,7 +107,7 @@ export default function Home() {
           </p>
           <div className={styles.howGrid}>
             <div className={styles.howCard}>
-              <div className={styles.howCardText}>
+              <div className={`${styles.howCardText} mb-[60px]`}>
                 <h3 className={styles.howCardTitle}>Voice Input</h3>
                 <p className={styles.howCardBody}>
                   Capture natural speech across Malay, English, Mandarin, and
@@ -111,16 +115,26 @@ export default function Home() {
                 </p>
               </div>
               <div className={styles.howWave}>
+                <div className="relative flex h-[250px] w-full flex-col items-center justify-center overflow-hidden rounded-lg">
+                  <GridPattern
+                    style={{ border: "none" }}
+                    width={40}
+                    height={40}
+                    className={cn(
+                      "[mask-image:linear-gradient(to_bottom_right,transparent,transparent,#1d4ed8a8,transparent,transparent,#1d4ed8a8)] "
+                    )}
+                  />
+                </div>
                 <StaticWaveform
                   height={150}
-                  barWidth={3}
+                  barWidth={4}
                   barGap={8}
                   barColor="#2563eb"
                   className={styles.howWaveStatic}
                 />
                 <ScrollingWaveform
                   height={150}
-                  barWidth={3}
+                  barWidth={4}
                   barGap={8}
                   speed={40}
                   fadeEdges
@@ -137,6 +151,27 @@ export default function Home() {
                   ensures accurate comprehension and transcription.
                 </p>
               </div>
+              <div className={`${styles.howWave} ${styles.aiOrb}`}>
+                {/* <div className="absolute flex h-[250px] w-full flex-col items-center justify-center rounded-lg">
+                  <BackgroundPaths title="" />
+                </div> */}
+                <div className={styles.orbStage}>
+                  <span className={styles.orbRing} aria-hidden="true" />
+                  <div className={styles.orbWrap}>
+                    <video
+                      className={styles.orbVideo}
+                      src="https://www.apple.com/105/media/us/siri/2018/ee7c4c16_aae5_4678_9cdd_7ca813baf929/films/siri_orb_large.mp4"
+                      autoPlay
+                      muted
+                      loop
+                      playsInline
+                      preload="metadata"
+                      // poster="/assets/orb-poster.jpg" // optional fallback image
+                    />
+                    <span className={styles.orbGloss} aria-hidden="true" />
+                  </div>
+                </div>
+              </div>
             </div>
             <div className={styles.howCard}>
               <div className={styles.howCardText}>
@@ -146,20 +181,122 @@ export default function Home() {
                   with realistic voices for seamless conversations.
                 </p>
               </div>
+              <div className={`${styles.howWave} ${styles.conversationWave}`}>
+                <div className={styles.conversationBackdrop}>
+                  <GridPattern
+                    style={{ border: "none" }}
+                    width={40}
+                    height={40}
+                    className={cn(
+                      "[mask-image:linear-gradient(to_bottom_right,transparent,transparent,#1d4ed8a8,transparent,transparent,#1d4ed8a8)] "
+                    )}
+                  />
+                </div>
+                <div className={styles.conversationWrap}>
+                  <ConversationDemo />
+                </div>
+              </div>
             </div>
           </div>
         </div>
       </section>
-
       <section className={styles.rapidscreenSection}>
         <div className={styles.rapidscreenHeader}>
           <h2 className={styles.rapidscreenTitle}>
-            Suara <span className={styles.rapidscreenHighlight}>×</span> RapidScreen
+            Suara <span className={styles.rapidscreenHighlight}>×</span>{" "}
+            RapidScreen
           </h2>
           <p className={styles.rapidscreenSubtitle}>
-            Our advanced AI models are trained to understand diverse Malaysian dialects and languages through RapidScreen
-            AI, ensuring accurate voice recognition across all communities.
+            Our advanced AI models are trained to understand diverse Malaysian
+            dialects and languages through RapidScreen AI, ensuring accurate
+            voice recognition across all communities.
           </p>
+        </div>
+        <div className={styles.rapidscreenGrid}>
+          <div className={styles.rapidscreenCard}>
+            <div className={styles.rapidscreenCardText}>
+              <h3 className={styles.rapidscreenCardTitle}>
+                Multilingual Understanding
+              </h3>
+              <p className={styles.rapidscreenCardBody}>
+                Recognizes Malay, English, Mandarin, Tamil, and dialect nuances
+                to keep every conversation clear.
+              </p>
+            </div>
+            <div className="relative flex h-[250px] w-full flex-col items-center justify-center overflow-hidden rounded-lg">
+              <GridPattern
+                style={{ border: "none" }}
+                width={40}
+                height={40}
+                className={cn(
+                  "[mask-image:linear-gradient(to_bottom_right,transparent,transparent,#1d4ed8a8,transparent,transparent,#1d4ed8a8)] "
+                )}
+              />
+            </div>
+          </div>
+          <div className={styles.rapidscreenCard}>
+            <div className={styles.rapidscreenCardText}>
+              <h3 className={styles.rapidscreenCardTitle}>
+                Accurate Speech-to-Text
+              </h3>
+              <p className={styles.rapidscreenCardBody}>
+                Advanced acoustic modeling delivers precise transcripts even in
+                noisy, real-world environments.
+              </p>
+            </div>
+            <div className="relative flex h-[250px] w-full flex-col items-center justify-center overflow-hidden rounded-lg">
+              <GridPattern
+                style={{ border: "none" }}
+                width={40}
+                height={40}
+                className={cn(
+                  "[mask-image:linear-gradient(to_bottom_right,transparent,transparent,#1d4ed8a8,transparent,transparent,#1d4ed8a8)] "
+                )}
+              />
+            </div>
+          </div>
+          <div className={styles.rapidscreenCard}>
+            <div className={styles.rapidscreenCardText}>
+              <h3 className={styles.rapidscreenCardTitle}>
+                Cross-Platform Access
+              </h3>
+              <p className={styles.rapidscreenCardBody}>
+                Seamless deployment across web, mobile, and telephony with
+                unified Suara APIs.
+              </p>
+            </div>
+            <div className="relative flex h-[250px] w-full flex-col items-center justify-center overflow-hidden rounded-lg">
+              <GridPattern
+                style={{ border: "none" }}
+                width={40}
+                height={40}
+                className={cn(
+                  "[mask-image:linear-gradient(to_bottom_right,transparent,transparent,#1d4ed8a8,transparent,transparent,#1d4ed8a8)] "
+                )}
+              />
+            </div>
+          </div>
+          <div className={styles.rapidscreenCard}>
+            <div className={styles.rapidscreenCardText}>
+              <h3 className={styles.rapidscreenCardTitle}>
+                AI-Powered Precision
+              </h3>
+              <p className={styles.rapidscreenCardBody}>
+                RapidScreen insights continuously tune Suara voice models for
+                faster, smarter responses.
+              </p>
+            </div>
+            <div className="relative flex h-[250px] w-full flex-col items-center justify-center overflow-hidden rounded-lg">
+              <GridPattern
+                style={{ border: "none" }}
+                width={40}
+                height={40}
+                className={cn(
+                  "[mask-image:linear-gradient(to_bottom_right,transparent,transparent,#1d4ed8a8,transparent,transparent,#1d4ed8a8)] "
+                )}
+              />
+            </div>
+          </div>
         </div>
       </section>
     </div>
