@@ -1,11 +1,10 @@
-import Image from "next/image";
-import styles from "./page.module.css";
+import { BarVisualizer } from "@/components/ui/bar-visualizer";
+import ConversationDemo from "@/components/ui/conversation-demo/conversation-demo";
+import { GridPattern } from "@/components/ui/shadcn-io/grid-pattern";
 import { ScrollingWaveform, StaticWaveform } from "@/components/ui/waveform";
 import { cn } from "@/lib/utils";
-import { GridPattern } from "@/components/ui/shadcn-io/grid-pattern";
-import { BackgroundPaths } from "@/components/ui/shadcn-io/background-paths";
-import ConversationDemo from "@/components/ui/conversation-demo/conversation-demo";
-import { BarVisualizer } from "@/components/ui/bar-visualizer";
+import Image from "next/image";
+import styles from "./page.module.css";
 
 export default function Home() {
   return (
@@ -14,12 +13,7 @@ export default function Home() {
         <div className={styles.heroContent}>
           <span className={styles.pill}>
             <span className={styles.pillIcon} aria-hidden="true">
-              <Image
-                  src="/assets/flash.png"
-                  alt=""
-                  width={13}
-                  height={13}
-                />
+              <Image src="/assets/flash.png" alt="" width={13} height={13} />
             </span>
             AI-Powered
           </span>
@@ -358,6 +352,69 @@ export default function Home() {
           </div>
         </div>
       </section>
+      {/* ===== Footer ===== */}
+      <footer className={styles.footer}>
+        <div className={styles.footerInner}>
+          {/* Brand / blurb */}
+          <div className={styles.footerBrand}>
+            <div className={styles.footerLogoName}>
+              <span>Suara</span>
+              <span className={styles.footerAccent}>.ai</span>
+            </div>
+            <p className={styles.footerDesc}>
+              Empowering voices across Malaysia with cutting-edge AI technology.
+              Making voice AI accessible for everyone.
+            </p>
+          </div>
+
+          {/* Links */}
+          <nav className={styles.footerCols} aria-label="Footer">
+            <div className={styles.footerCol}>
+              <h4 className={styles.footerColTitle}>Resources</h4>
+              <ul className={styles.footerLinks}>
+                <li>
+                  <a href="/about">About</a>
+                </li>
+                <li>
+                  <a href="/features">Features</a>
+                </li>
+                <li>
+                  <a href="#how">How It Works</a>
+                </li>
+                <li>
+                  <a href="/contact">Contact</a>
+                </li>
+              </ul>
+            </div>
+          </nav>
+        </div>
+
+        <hr className={styles.footerDivider} />
+
+        <div className={styles.footerBottom}>
+          <div className={styles.copyRow}>
+            <span className={styles.copyIcon} aria-hidden="true">
+              ©
+            </span>
+            <span>
+              {new Date().getFullYear()} Suara.ai. All rights reserved
+            </span>
+          </div>
+          <div
+            className={styles.legalLinks}
+            role="navigation"
+            aria-label="Legal"
+          >
+            <a href="/terms">Terms of Service</a>
+            <a href="/privacy">Privacy Policy</a>
+          </div>
+        </div>
+
+        {/* Watermark */}
+        <div className={styles.footerWatermark} aria-hidden="true">
+          Suara.ai
+        </div>
+      </footer>
     </div>
   );
 }
