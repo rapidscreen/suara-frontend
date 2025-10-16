@@ -392,7 +392,8 @@
   height: 500px;
 }
 
-.howCard::after, .rapidscreenCard::after {
+.howCard::after,
+.rapidscreenCard::after {
   content: "";
   position: absolute;
   inset: 0;
@@ -534,7 +535,6 @@
   border: 1px solid rgba(4, 9, 20, 0.06);
   border-radius: 24px;
   box-shadow: 0 18px 38px rgba(4, 9, 20, 0.08);
-  padding: 36px;
   display: flex;
   flex-direction: column;
   gap: 16px;
@@ -627,6 +627,285 @@
     radial-gradient(70% 60% at 60% 80%, rgba(255, 255, 255, .10), rgba(255, 255, 255, 0) 60%);
   pointer-events: none;
   mix-blend-mode: screen;
+}
+
+.mlStage {
+  position: relative;
+  margin-top: 14px;
+  height: 320px;
+  border-radius: 22px;
+  overflow: hidden;
+  background: radial-gradient(120% 100% at 50% 0%, #ffffff00 0%, #dfe9ff1a 100%);
+}
+
+.mlMic {
+  position: absolute;
+  left: 50%;
+  top: 56%;
+  transform: translate(-50%, -50%);
+  width: 96px;
+  height: 96px;
+  border-radius: 999px;
+  background: radial-gradient(75% 60% at 50% 35%, #e9f1ff, #dbe7ff);
+  box-shadow:
+    0 10px 26px rgba(4, 9, 20, .12),
+    inset 0 1px 0 rgba(255, 255, 255, .7);
+  display: grid;
+  place-items: center;
+}
+
+.mlMicRing {
+  position: absolute;
+  inset: -18px;
+  border-radius: 999px;
+  background: radial-gradient(60% 60% at 50% 50%, #cfe0ff7a, #cfe0ff00 70%);
+  box-shadow: inset 0 1px 0 rgba(255, 255, 255, .9);
+}
+
+.mlMicIcon {
+  filter: drop-shadow(0 1px 1px rgba(4, 9, 20, .12));
+  opacity: .9;
+  fill: #3E80F7;
+}
+
+.mlBubble {
+  position: absolute;
+  background: #2563eb;
+  color: #fff;
+  font-weight: 700;
+  font-size: 15px;
+  line-height: 1;
+  padding: 12px 16px;
+  border-radius: 12px;
+  box-shadow: 0 10px 24px rgba(37, 99, 235, .18);
+}
+
+/* little tail */
+.mlBubble::after {
+  content: "";
+  position: absolute;
+  border: 8px solid transparent;
+  border-top-color: #2563eb;
+  bottom: -14px;
+  left: 28px;
+  transform: translateX(-50%);
+  filter: drop-shadow(0 2px 2px rgba(37, 99, 235, .18));
+}
+
+/* bubble positions */
+.mlTopLeft {
+  top: 54px;
+  left: clamp(24px, 8vw, 140px);
+}
+
+.mlTopRight {
+  top: 78px;
+  right: clamp(24px, 8vw, 160px);
+}
+
+.mlBottomLeft {
+  bottom: 52px;
+  left: clamp(24px, 8vw, 160px);
+}
+
+.mlBottomRight {
+  bottom: 38px;
+  right: clamp(24px, 8vw, 120px);
+}
+
+.sttStage {
+  position: relative;
+  margin-top: 18px;
+  border-radius: 22px;
+  overflow: hidden;
+  display: grid;
+  place-items: center;
+  height: 100%;
+  background: radial-gradient(120% 100% at 50% 0%, #ffffff00 0%, #dfe9ff1a 100%);
+}
+
+.sttGridBg {
+  position: absolute;
+  inset: 0;
+  opacity: .22;
+  pointer-events: none;
+  color: #2563eb;
+  /* GridPattern uses currentColor */
+  -webkit-mask-image: radial-gradient(90% 75% at 50% 60%, white 70%, transparent 100%);
+  mask-image: radial-gradient(90% 75% at 50% 60%, white 70%, transparent 100%);
+}
+
+/* Pills */
+.sttPillLeft,
+.sttPillRight {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 84px;
+  height: 166px;
+  border-radius: 999px;
+  background: #2563eb1a;
+  box-shadow:
+    inset 0 1px 0 rgba(255, 255, 255, .8),
+    0 10px 24px rgba(37, 99, 235, .10);
+  backdrop-filter: blur(6px);
+  overflow: hidden;
+}
+
+.sttPillLeft {
+  left: clamp(24px, 10vw, 10%);
+}
+
+.sttPillRight {
+  right: clamp(24px, 10vw, 8%);
+}
+
+
+.sttPillInner {
+  position: absolute;
+  border-radius: inherit;
+  display: grid;
+  width: 85px;
+  height: 208px;
+  place-items: center;
+  background: #2563EB33;
+  overflow: hidden;
+  border-radius: 999px;
+  padding: 20px;
+}
+
+.rightPill {
+  right: 15%;
+}
+
+.leftPill {
+  left: 15%;
+}
+
+/* Center mic */
+.sttMic {
+  position: absolute;
+  z-index: 1;
+  width: 76px;
+  height: 76px;
+  border-radius: 999px;
+  border: none;
+  cursor: default;
+  background: radial-gradient(65% 60% at 50% 35%, #0338c9, #2563EB);
+  box-shadow:
+    0 16px 36px rgba(30, 63, 174, .30),
+    inset 0 -10px 22px rgba(0, 0, 0, .25),
+    inset 0 10px 16px rgba(255, 255, 255, .22);
+  display: grid;
+  place-items: center;
+}
+
+.sttMicInner {
+  width: 60px;
+  height: 60px;
+  border-radius: 999px;
+  display: grid;
+  place-items: center;
+}
+
+/* Transcript lines fallback (right pill) */
+.sttLines {
+  display: grid;
+  gap: 12px;
+}
+
+.sttLine {
+  height: 12px;
+  border-radius: 10px;
+  background: #2563eb;
+  opacity: .9;
+  filter: drop-shadow(0 8px 16px rgba(37, 99, 235, .16));
+}
+
+/* Rotate any visualizer you drop in (so it’s “sideways”) */ .rot90 {
+  transform: rotate(90deg);
+  transform-origin: center;
+  position: absolute;
+  width: 140px;
+  height: 140px;
+  display: grid;
+  place-items: center;
+}
+
+/* responsive tweaks */
+@media (max-width: 900px) {
+  .sttStage {
+    height: 260px;
+  }
+
+  .sttMic {
+    width: 70px;
+    height: 70px;
+  }
+
+  .sttMicInner {
+    width: 56px;
+    height: 56px;
+  }
+}
+
+@media (max-width: 640px) {
+  .sttStage {
+    height: 240px;
+  }
+
+  .sttPillLeft,
+  .sttPillRight {
+    width: 130px;
+    height: 200px;
+  }
+}
+
+/* responsive adjustments */
+@media (max-width: 900px) {
+  .mlStage {
+    height: 280px;
+  }
+
+  .mlMic {
+    width: 86px;
+    height: 86px;
+  }
+
+  .mlBubble {
+    font-size: 14px;
+  }
+}
+
+@media (max-width: 640px) {
+  .mlStage {
+    height: 260px;
+  }
+
+  .mlBubble {
+    font-size: 13px;
+    padding: 10px 12px;
+  }
+
+  .mlTopLeft {
+    top: 56px;
+    left: 24px;
+  }
+
+  .mlTopRight {
+    top: 80px;
+    right: 24px;
+  }
+
+  .mlBottomLeft {
+    bottom: 56px;
+    left: 24px;
+  }
+
+  .mlBottomRight {
+    bottom: 40px;
+    right: 24px;
+  }
 }
 
 /* motion-respectful fallback */

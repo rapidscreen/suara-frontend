@@ -5,6 +5,7 @@ import { cn } from "@/lib/utils";
 import { GridPattern } from "@/components/ui/shadcn-io/grid-pattern";
 import { BackgroundPaths } from "@/components/ui/shadcn-io/background-paths";
 import ConversationDemo from "@/components/ui/conversation-demo/conversation-demo";
+import { BarVisualizer } from "@/components/ui/bar-visualizer";
 
 export default function Home() {
   return (
@@ -13,15 +14,12 @@ export default function Home() {
         <div className={styles.heroContent}>
           <span className={styles.pill}>
             <span className={styles.pillIcon} aria-hidden="true">
-              <svg
-                width="14"
-                height="14"
-                viewBox="0 0 24 24"
-                fill="none"
-                xmlns="http://www.w3.org/2000/svg"
-              >
-                <path d="M13 2 5 14h6l-1 8 8-12h-6l1-8Z" fill="currentColor" />
-              </svg>
+              <Image
+                  src="/assets/flash.png"
+                  alt=""
+                  width={13}
+                  height={13}
+                />
             </span>
             AI-Powered
           </span>
@@ -152,9 +150,16 @@ export default function Home() {
                 </p>
               </div>
               <div className={`${styles.howWave} ${styles.aiOrb}`}>
-                {/* <div className="absolute flex h-[250px] w-full flex-col items-center justify-center rounded-lg">
-                  <BackgroundPaths title="" />
-                </div> */}
+                <div className="absolute bottom-[10%] flex h-full w-[690px] flex-col items-center justify-center">
+                  <Image
+                    src="/assets/wavy-lines.svg"
+                    alt=""
+                    width={200}
+                    height={100}
+                    style={{ height: "500px", width: "500px" }}
+                    className="absolute"
+                  />
+                </div>
                 <div className={styles.orbStage}>
                   <span className={styles.orbRing} aria-hidden="true" />
                   <div className={styles.orbWrap}>
@@ -223,15 +228,40 @@ export default function Home() {
                 to keep every conversation clear.
               </p>
             </div>
-            <div className="relative flex h-[250px] w-full flex-col items-center justify-center overflow-hidden rounded-lg">
-              <GridPattern
-                style={{ border: "none" }}
-                width={40}
-                height={40}
-                className={cn(
-                  "[mask-image:linear-gradient(to_bottom_right,transparent,transparent,#1d4ed8a8,transparent,transparent,#1d4ed8a8)] "
-                )}
-              />
+            <div className={styles.mlStage}>
+              <div className="relative flex h-full w-full flex-col items-center justify-center overflow-hidden rounded-lg">
+                <GridPattern
+                  style={{ border: "none" }}
+                  width={40}
+                  height={40}
+                  className={cn(
+                    "[mask-image:linear-gradient(to_bottom_right,transparent,transparent,#1d4ed8a8,transparent,transparent,#1d4ed8a8)] "
+                  )}
+                />
+              </div>
+              <div className={styles.mlMic} aria-hidden="true">
+                <span className={styles.mlMicRing} />
+                <Image
+                  src="/assets/microphone-blue.svg"
+                  alt=""
+                  width={33}
+                  height={33}
+                  className={styles.mlMicIcon}
+                />
+              </div>
+
+              <span className={`${styles.mlBubble} ${styles.mlTopLeft}`}>
+                Apa khabar?
+              </span>
+              <span className={`${styles.mlBubble} ${styles.mlTopRight}`}>
+                How are you?
+              </span>
+              <span className={`${styles.mlBubble} ${styles.mlBottomLeft}`}>
+                Nǐ hǎo ma?
+              </span>
+              <span className={`${styles.mlBubble} ${styles.mlBottomRight}`}>
+                நலமா?
+              </span>
             </div>
           </div>
           <div className={styles.rapidscreenCard}>
@@ -244,15 +274,44 @@ export default function Home() {
                 noisy, real-world environments.
               </p>
             </div>
-            <div className="relative flex h-[250px] w-full flex-col items-center justify-center overflow-hidden rounded-lg">
-              <GridPattern
-                style={{ border: "none" }}
-                width={40}
-                height={40}
-                className={cn(
-                  "[mask-image:linear-gradient(to_bottom_right,transparent,transparent,#1d4ed8a8,transparent,transparent,#1d4ed8a8)] "
-                )}
-              />
+            <div className={styles.sttStage}>
+              <div className="relative flex h-full w-full flex-col items-center justify-center overflow-hidden rounded-lg">
+                <GridPattern
+                  style={{ border: "none" }}
+                  width={40}
+                  height={40}
+                  className={cn(
+                    "[mask-image:linear-gradient(to_bottom_right,transparent,transparent,#1d4ed8a8,transparent,transparent,#1d4ed8a8)] "
+                  )}
+                />
+              </div>
+              <div className={styles.sttPillLeft}></div>
+              <div className={`${styles.sttPillInner} ${styles.leftPill}`}>
+                <ScrollingWaveform
+                  height={150}
+                  barWidth={4}
+                  barGap={3}
+                  barColor="#2563EB"
+                />
+              </div>
+
+              <button className={styles.sttMic} aria-label="Record">
+                <span className={styles.sttMicInner}>
+                  <Image
+                    src="/assets/microphone-2.svg"
+                    alt=""
+                    width={33}
+                    height={33}
+                  />
+                </span>
+              </button>
+
+              <div className={styles.sttPillRight}></div>
+              <div className={`${styles.sttPillInner} ${styles.rightPill}`}>
+                <div className={styles.rot90}>
+                  <BarVisualizer state="listening" barCount={15} demo={true} />
+                </div>
+              </div>
             </div>
           </div>
           <div className={styles.rapidscreenCard}>
