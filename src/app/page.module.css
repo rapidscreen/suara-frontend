@@ -1,28 +1,4 @@
 /* =========================
-   TOKENS / THEME
-========================= */
-:root {
-  --bg: #fff;
-  --ink: #040914;
-  --muted: #29282bbf;
-
-  --brand: #2563eb;
-  --brand-soft: #2563eb1a;
-
-  --chip-bg: #ffffffcc;
-  --chip-ink: #1d4ed8;
-
-  --shadow: 0 12px 32px rgba(4, 9, 20, 0.08);
-
-  /* ripple rings */
-  --pulse-color: 37, 99, 235;
-  /* rgb for easy alpha use */
-  --pulse-alpha: .45;
-  --pulse-border: 3px;
-  --pulse-duration: 2.6s;
-}
-
-/* =========================
    LAYOUT: PAGE / HERO
 ========================= */
 .page {
