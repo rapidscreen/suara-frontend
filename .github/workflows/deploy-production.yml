@@ -161,10 +161,10 @@ jobs:
       - name: 🗑️ Clear existing files
         run: |
           echo "🧹 Clearing existing files from Azure Storage..."
-          az storage blob delete-batch 
-            --account-name ${{ env.AZURE_STORAGE_ACCOUNT }} 
-            --account-key ${{ secrets.AZURE_STORAGE_KEY }} 
-            --source '$web' 
+          az storage blob delete-batch \
+            --account-name ${{ env.AZURE_STORAGE_ACCOUNT }} \
+            --account-key ${{ secrets.AZURE_STORAGE_KEY }} \
+            --source '$web' \
             --pattern '*'
           echo "✅ Existing files cleared"
         continue-on-error: true
@@ -172,22 +172,13 @@ jobs:
       - name: ☁️ Deploy to Azure Storage
         run: |
           echo "🚀 Deploying new files to Azure Storage..."
-          az storage blob upload-batch 
-            --account-name ${{ env.AZURE_STORAGE_ACCOUNT }} 
-            --account-key ${{ secrets.AZURE_STORAGE_KEY }} 
-            --destination '$web' 
-            --source ./dist 
-            --overwrite true 
-            --content-type 'text/html' 
-            --pattern '*.html'
-          
-          az storage blob upload-batch 
-            --account-name ${{ env.AZURE_STORAGE_ACCOUNT }} 
-            --account-key ${{ secrets.AZURE_STORAGE_KEY }} 
-            --destination '$web' 
-            --source ./dist 
-            --overwrite true 
-            --exclude-pattern '*.html'
+          az storage blob upload-batch \
+            --account-name ${{ env.AZURE_STORAGE_ACCOUNT }} \
+            --account-key ${{ secrets.AZURE_STORAGE_KEY }} \
+            --destination '$web' \
+            --source ./dist \
+            --overwrite
+          echo "✅ Deployment completed successfully"
           echo "✅ Deployment completed successfully"
 
       - name: 🏥 Health check
