@@ -172,21 +172,21 @@ jobs:
       - name: ☁️ Deploy to Azure Storage
         run: |
           echo "🚀 Deploying new files to Azure Storage..."
-          az storage blob upload-batch \
-            --account-name ${{ env.AZURE_STORAGE_ACCOUNT }} \
-            --account-key ${{ secrets.AZURE_STORAGE_KEY }} \
-            --destination '$web' \
-            --source ./dist \
-            --overwrite true \
-            --content-type 'text/html' \
+          az storage blob upload-batch 
+            --account-name ${{ env.AZURE_STORAGE_ACCOUNT }} 
+            --account-key ${{ secrets.AZURE_STORAGE_KEY }} 
+            --destination '$web' 
+            --source ./dist 
+            --overwrite true 
+            --content-type 'text/html' 
             --pattern '*.html'
           
-          az storage blob upload-batch \
-            --account-name ${{ env.AZURE_STORAGE_ACCOUNT }} \
-            --account-key ${{ secrets.AZURE_STORAGE_KEY }} \
-            --destination '$web' \
-            --source ./dist \
-            --overwrite true \
+          az storage blob upload-batch 
+            --account-name ${{ env.AZURE_STORAGE_ACCOUNT }} 
+            --account-key ${{ secrets.AZURE_STORAGE_KEY }} 
+            --destination '$web' 
+            --source ./dist 
+            --overwrite true 
             --exclude-pattern '*.html'
           echo "✅ Deployment completed successfully"
 
