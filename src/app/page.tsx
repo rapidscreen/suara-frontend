@@ -318,15 +318,72 @@ export default function Home() {
                 unified Suara APIs.
               </p>
             </div>
-            <div className="relative flex h-[250px] w-full flex-col items-center justify-center overflow-hidden rounded-lg">
-              <GridPattern
-                style={{ border: "none" }}
-                width={40}
-                height={40}
-                className={cn(
-                  "[mask-image:linear-gradient(to_bottom_right,transparent,transparent,#1d4ed8a8,transparent,transparent,#1d4ed8a8)] "
-                )}
-              />
+            <div className={styles.xpStage}>
+              <div className="relative flex h-full w-full flex-col items-center justify-center rounded-lg">
+                <GridPattern
+                  style={{ border: "none" }}
+                  width={40}
+                  height={40}
+                  className={cn(
+                    "[mask-image:linear-gradient(to_bottom_right,transparent,transparent,#1d4ed8a8,transparent,transparent,#1d4ed8a8)] "
+                  )}
+                />
+              </div>
+              <div className="absolute top-[0] rounded-[999px] w-full border border-blue-500 h-[600px]">
+                <div className={`${styles.xpIcon} ${styles.xpChat}`}>
+                  <Image
+                    src="/assets/icon-chat.svg"
+                    alt="Chat"
+                    width={26}
+                    height={26}
+                  />
+                </div>
+
+                <div className={`${styles.xpIcon} ${styles.xpWeb}`}>
+                  <Image
+                    src="/assets/icon-globe.svg"
+                    alt="Web"
+                    width={26}
+                    height={26}
+                  />
+                </div>
+
+                <div className={`${styles.xpIcon} ${styles.xpPhone}`}>
+                  <Image
+                    src="/assets/icon-phone.svg"
+                    alt="Phone"
+                    width={24}
+                    height={24}
+                  />
+                </div>
+                <div className={`${styles.xpIcon} ${styles.xpChat}`}>
+                  <Image
+                    src="/assets/icon-chat.svg"
+                    alt="Chat"
+                    width={26}
+                    height={26}
+                  />
+                </div>
+
+                <div className={`${styles.xpIcon} ${styles.xpWeb}`}>
+                  <Image
+                    src="/assets/icon-globe.svg"
+                    alt="Web"
+                    width={26}
+                    height={26}
+                  />
+                </div>
+
+                <div className={`${styles.xpIcon} ${styles.xpPhone}`}>
+                  <Image
+                    src="/assets/icon-phone.svg"
+                    alt="Phone"
+                    width={24}
+                    height={24}
+                  />
+                </div>
+              </div>
+              <div className="absolute top-[20%] left-[10%] rounded-[999px] w-[80%] border border-[#72A2F9] h-[600px]"></div>
             </div>
           </div>
           <div className={styles.rapidscreenCard}>
@@ -339,7 +396,7 @@ export default function Home() {
                 faster, smarter responses.
               </p>
             </div>
-            <div className="relative flex h-[250px] w-full flex-col items-center justify-center overflow-hidden rounded-lg">
+            <div className="relative flex h-full w-full flex-col items-center justify-center rounded-lg">
               <GridPattern
                 style={{ border: "none" }}
                 width={40}
@@ -348,6 +405,37 @@ export default function Home() {
                   "[mask-image:linear-gradient(to_bottom_right,transparent,transparent,#1d4ed8a8,transparent,transparent,#1d4ed8a8)] "
                 )}
               />
+              <div className="relative h-full w-full">
+                <div className="absolute left-[35%] top-0 w-max font-semibold text-3xl text-[#3E80F7] bg-white shadow-[inset_0_1px_6px_#2563EB1A] p-4 rounded-xl">
+                  Suara
+                </div>
+                <div className="flex flex-row gap-3 absolute left-[22%] bottom-[43%]">
+                  <div className=" w-max font-semibold text-3xl text-[#3E80F7] bg-white shadow-[inset_0_1px_6px_#2563EB1A] p-2 rounded-xl">
+                    <Image
+                      src="/assets/chatgpt.png"
+                      alt="Web"
+                      width={100}
+                      height={60}
+                    />
+                  </div>
+                  <div className="w-max font-semibold text-3xl text-[#3E80F7] bg-white shadow-[inset_0_1px_6px_#2563EB1A] p-2 rounded-xl">
+                    <Image
+                      src="/assets/llama.png"
+                      alt="Web"
+                      width={100}
+                      height={60}
+                    />
+                  </div>
+                </div>
+                <div className="absolute w-max left-[35%] bottom-[5%] font-semibold text-3xl text-[#3E80F7] bg-white shadow-[inset_0_1px_6px_#2563EB1A] p-4 rounded-xl">
+                  <Image
+                    src="/assets/elevenlabs.png"
+                    alt="Web"
+                    width={100}
+                    height={60}
+                  />
+                </div>
+              </div>
             </div>
           </div>
         </div>

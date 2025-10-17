@@ -235,69 +235,60 @@ const ConversationDemo = () => {
       <div className="flex h-full flex-col overflow-hidden">
         <Conversation className="overflow-hidden">
           <ConversationContent className="overflow-hidden">
-            {messages.length === 0 && streamingMessageIndex === null ? (
-              <ConversationEmptyState
-                icon={<Orb className="size-12" />}
-                title="Start a conversation"
-                description="This is a simulated conversation"
-              />
-            ) : (
-              <>
-                {messages.map((message) => (
-                  <Message from={message.role} key={message.id}>
-                    {message.role === "user" && (
-                      <MessageContent>
-                        {message.parts.map((part, i) => {
-                          switch (part.type) {
-                            case "text":
-                              return (
-                                <Response key={`${message.id}-${i}`}>
-                                  {part.text}
-                                </Response>
-                              );
-                            default:
-                              return null;
-                          }
-                        })}
-                      </MessageContent>
-                    )}
-                    {message.role === "assistant" && (
-                      <div className="ring-border w-[200px] overflow-hidden rounded-sm ring-1">
-                        <StaticWaveform
-                          height={48}
-                          barWidth={2}
-                          barGap={2}
-                          barColor="#2563eb"
-                          // className={styles.howWaveStatic}
-                        />{" "}
-                      </div>
-                    )}
-                  </Message>
-                ))}
-                {streamingMessageIndex !== null && (
-                  <Message
-                    from={allMessages[streamingMessageIndex].role}
-                    key={`streaming-${streamingMessageIndex}`}
-                  >
-                    {/* <MessageContent>
+            <>
+              {messages.map((message) => (
+                <Message from={message.role} key={message.id}>
+                  {message.role === "user" && (
+                    <MessageContent>
+                      {message.parts.map((part, i) => {
+                        switch (part.type) {
+                          case "text":
+                            return (
+                              <Response key={`${message.id}-${i}`}>
+                                {part.text}
+                              </Response>
+                            );
+                          default:
+                            return null;
+                        }
+                      })}
+                    </MessageContent>
+                  )}
+                  {message.role === "assistant" && (
+                    <div className="ring-border w-[200px] overflow-hidden rounded-sm ring-1">
+                      <StaticWaveform
+                        height={48}
+                        barWidth={2}
+                        barGap={2}
+                        barColor="#2563eb"
+                        // className={styles.howWaveStatic}
+                      />{" "}
+                    </div>
+                  )}
+                </Message>
+              ))}
+              {streamingMessageIndex !== null && (
+                <Message
+                  from={allMessages[streamingMessageIndex].role}
+                  key={`streaming-${streamingMessageIndex}`}
+                >
+                  {/* <MessageContent>
                       <Response>{streamingContent || "\u200B"}</Response>
                     </MessageContent> */}
-                    {allMessages[streamingMessageIndex].role ===
-                      "assistant" && (
-                      <div className="ring-border w-[200px] overflow-hidden rounded-sm ring-1">
-                        <StaticWaveform
-                          height={48}
-                          barWidth={2}
-                          barGap={2}
-                          barColor="#2563eb"
-                          // className={styles.howWaveStatic}
-                        />
-                      </div>
-                    )}
-                  </Message>
-                )}
-              </>
-            )}
+                  {allMessages[streamingMessageIndex].role === "assistant" && (
+                    <div className="ring-border w-[200px] overflow-hidden rounded-sm ring-1">
+                      <StaticWaveform
+                        height={48}
+                        barWidth={2}
+                        barGap={2}
+                        barColor="#2563eb"
+                        // className={styles.howWaveStatic}
+                      />
+                    </div>
+                  )}
+                </Message>
+              )}
+            </>
           </ConversationContent>
           <ConversationScrollButton />
         </Conversation>
