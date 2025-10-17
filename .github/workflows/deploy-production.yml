@@ -1,0 +1,224 @@
+name: 🚀 Deploy to Azure Production
+
+on:
+  push:
+    branches: [main]
+  workflow_dispatch:
+    inputs:
+      force_deploy:
+        description: 'Force deployment even if no changes'
+        required: false
+        default: 'false'
+        type: choice
+        options:
+          - 'true'
+          - 'false'
+
+env:
+  NODE_VERSION: '20.x'
+  AZURE_STORAGE_ACCOUNT: 'productionsuara'
+  AZURE_RESOURCE_GROUP: 'swe'
+
+jobs:
+  # Security and Quality Gates
+  security-scan:
+    name: 🛡️ Security & Quality Checks
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - name: 📥 Checkout code
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: 🔍 Run Trivy vulnerability scanner
+        uses: aquasecurity/trivy-action@master
+        with:
+          scan-type: 'fs'
+          scan-ref: '.'
+          format: 'sarif'
+          output: 'trivy-results.sarif'
+          severity: 'CRITICAL,HIGH'
+
+      - name: 📊 Upload Trivy scan results
+        uses: github/codeql-action/upload-sarif@v3
+        if: always()
+        with:
+          sarif_file: 'trivy-results.sarif'
+
+      - name: 🔐 Check for secrets
+        uses: trufflesecurity/trufflehog@main
+        with:
+          path: ./
+          base: ${{ github.event.repository.default_branch }}
+          head: HEAD
+          extra_args: --debug --only-verified
+
+  # Build and Test
+  build-and-test:
+    name: 🏗️ Build & Test
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    needs: security-scan
+    outputs:
+      cache-key: ${{ steps.cache.outputs.cache-hit }}
+      build-hash: ${{ steps.build-hash.outputs.hash }}
+    steps:
+      - name: 📥 Checkout code
+        uses: actions/checkout@v4
+
+      - name: 📦 Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: ${{ env.NODE_VERSION }}
+          cache: 'npm'
+
+      - name: 🔍 Validate package.json
+        run: |
+          node -p "JSON.parse(require('fs').readFileSync('package.json'))"
+          echo "✅ package.json is valid"
+
+      - name: 📂 Cache dependencies
+        id: cache
+        uses: actions/cache@v4
+        with:
+          path: |
+            ~/.npm
+            ${{ github.workspace }}/.next/cache
+            node_modules
+          key: ${{ runner.os }}-nextjs-${{ hashFiles('**/package-lock.json') }}-${{ hashFiles('**/*.js', '**/*.jsx', '**/*.ts', '**/*.tsx') }}
+          restore-keys: |
+            ${{ runner.os }}-nextjs-${{ hashFiles('**/package-lock.json') }}-
+            ${{ runner.os }}-nextjs-
+
+      - name: 📥 Install dependencies
+        run: |
+          npm ci --prefer-offline --no-audit --progress=false
+          echo "✅ Dependencies installed successfully"
+
+      - name: 🔧 Lint code
+        run: |
+          npm run lint
+          echo "✅ Linting completed successfully"
+
+      - name: 🏗️ Build application
+        run: |
+          npm run build
+          echo "✅ Build completed successfully"
+        env:
+          NODE_ENV: production
+          NEXT_TELEMETRY_DISABLED: 1
+
+      - name: 📊 Generate build hash
+        id: build-hash
+        run: |
+          BUILD_HASH=$(find out -type f -exec sha256sum {} \; | sha256sum | cut -d' ' -f1)
+          echo "hash=$BUILD_HASH" >> $GITHUB_OUTPUT
+          echo "🔍 Build hash: $BUILD_HASH"
+
+      - name: 📤 Upload build artifacts
+        uses: actions/upload-artifact@v4
+        with:
+          name: nextjs-build-${{ github.sha }}
+          path: |
+            out/
+            !out/**/*.map
+          retention-days: 30
+          compression-level: 9
+
+      - name: 📊 Build summary
+        run: |
+          echo "## 📊 Build Summary" >> $GITHUB_STEP_SUMMARY
+          echo "- **Build Hash:** \`${{ steps.build-hash.outputs.hash }}\`" >> $GITHUB_STEP_SUMMARY
+          echo "- **Node Version:** \`${{ env.NODE_VERSION }}\`" >> $GITHUB_STEP_SUMMARY
+          echo "- **Build Size:** \`$(du -sh out | cut -f1)\`" >> $GITHUB_STEP_SUMMARY
+          echo "- **Files Generated:** \`$(find out -type f | wc -l)\`" >> $GITHUB_STEP_SUMMARY
+
+  # Deploy to Azure
+  deploy-azure:
+    name: 🌐 Deploy to Azure
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    needs: [build-and-test]
+    environment:
+      name: production
+      url: https://productionsuara.z23.web.core.windows.net/
+    concurrency:
+      group: production-deployment
+      cancel-in-progress: false
+    steps:
+      - name: 📥 Download build artifacts
+        uses: actions/download-artifact@v4
+        with:
+          name: nextjs-build-${{ github.sha }}
+          path: ./dist
+
+      - name: 🔑 Azure Login
+        uses: azure/login@v2
+        with:
+          creds: ${{ secrets.AZURE_CREDENTIALS }}
+
+      - name: 🗑️ Clear existing files
+        run: |
+          echo "🧹 Clearing existing files from Azure Storage..."
+          az storage blob delete-batch \
+            --source '$web' \
+            --account-name ${{ env.AZURE_STORAGE_ACCOUNT }} \
+            --auth-mode login \
+            --output none
+          echo "✅ Existing files cleared"
+
+      - name: 📤 Deploy to Azure Storage
+        run: |
+          echo "🚀 Deploying new files to Azure Storage..."
+          az storage blob upload-batch \
+            --destination '$web' \
+            --source './dist' \
+            --account-name ${{ env.AZURE_STORAGE_ACCOUNT }} \
+            --auth-mode login \
+            --overwrite \
+            --output table
+          echo "✅ Deployment completed successfully"
+
+      - name: 🏥 Health check
+        run: |
+          echo "🔍 Performing health check..."
+          ENDPOINT="https://${{ env.AZURE_STORAGE_ACCOUNT }}.z23.web.core.windows.net/"
+          
+          # Wait for deployment to propagate
+          sleep 10
+          
+          # Check if the site is accessible
+          HTTP_CODE=$(curl -s -o /dev/null -w "%{http_code}" "$ENDPOINT" || echo "000")
+          
+          if [ "$HTTP_CODE" = "200" ]; then
+            echo "✅ Health check passed - Site is accessible (HTTP $HTTP_CODE)"
+            echo "🌐 **Site URL:** $ENDPOINT" >> $GITHUB_STEP_SUMMARY
+          else
+            echo "❌ Health check failed - HTTP $HTTP_CODE"
+            echo "🚨 **Deployment Issue:** Site returned HTTP $HTTP_CODE" >> $GITHUB_STEP_SUMMARY
+            exit 1
+          fi
+
+  # Notify on completion
+  notify-completion:
+    name: 📢 Deployment Notification
+    runs-on: ubuntu-latest
+    needs: [deploy-azure]
+    if: always()
+    steps:
+      - name: 🎉 Success notification
+        if: needs.deploy-azure.result == 'success'
+        run: |
+          echo "## 🎉 Deployment Successful!" >> $GITHUB_STEP_SUMMARY
+          echo "**🌐 Production Site:** https://${{ env.AZURE_STORAGE_ACCOUNT }}.z23.web.core.windows.net/" >> $GITHUB_STEP_SUMMARY
+          echo "**📦 Build:** \`${{ github.sha }}\`" >> $GITHUB_STEP_SUMMARY
+          echo "**⏰ Deployed:** \`$(date -u '+%Y-%m-%d %H:%M:%S UTC')\`" >> $GITHUB_STEP_SUMMARY
+
+      - name: ⚠️ Failure notification
+        if: needs.deploy-azure.result == 'failure'
+        run: |
+          echo "## ❌ Deployment Failed!" >> $GITHUB_STEP_SUMMARY
+          echo "**📦 Build:** \`${{ github.sha }}\`" >> $GITHUB_STEP_SUMMARY
+          echo "**⏰ Failed at:** \`$(date -u '+%Y-%m-%d %H:%M:%S UTC')\`" >> $GITHUB_STEP_SUMMARY
+          echo "Check the logs above for more details." >> $GITHUB_STEP_SUMMARY
