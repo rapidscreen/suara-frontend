@@ -1,5 +1,6 @@
 import { BarVisualizer } from "@/components/ui/bar-visualizer";
 import ConversationDemo from "@/components/ui/conversation-demo/conversation-demo";
+import OrbAutoPlay from "@/components/ui/orb-autoplay/orb-autoplay";
 import { GridPattern } from "@/components/ui/shadcn-io/grid-pattern";
 import { ScrollingWaveform, StaticWaveform } from "@/components/ui/waveform";
 import { cn } from "@/lib/utils";
@@ -7,6 +8,7 @@ import Image from "next/image";
 import styles from "./page.module.css";
 
 export default function Home() {
+
   return (
     <div className={styles.page}>
       <section className={styles.hero}>
@@ -99,7 +101,7 @@ export default function Home() {
           </p>
           <div className={styles.howGrid}>
             <div className={styles.howCard}>
-              <div className={`${styles.howCardText} mb-[60px]`}>
+              <div className={`${styles.howCardText} sm:mb-[20px] md:mb-[60px]`}>
                 <h3 className={styles.howCardTitle}>Voice Input</h3>
                 <p className={styles.howCardBody}>
                   Capture natural speech across Malay, English, Mandarin, and
@@ -157,16 +159,7 @@ export default function Home() {
                 <div className={styles.orbStage}>
                   <span className={styles.orbRing} aria-hidden="true" />
                   <div className={styles.orbWrap}>
-                    <video
-                      className={styles.orbVideo}
-                      src="https://www.apple.com/105/media/us/siri/2018/ee7c4c16_aae5_4678_9cdd_7ca813baf929/films/siri_orb_large.mp4"
-                      autoPlay
-                      muted
-                      loop
-                      playsInline
-                      preload="metadata"
-                      // poster="/assets/orb-poster.jpg" // optional fallback image
-                    />
+                    <OrbAutoPlay />
                     <span className={styles.orbGloss} aria-hidden="true" />
                   </div>
                 </div>
@@ -329,7 +322,7 @@ export default function Home() {
                   )}
                 />
               </div>
-              <div className="absolute top-[0] rounded-[999px] w-full border border-blue-500 h-[600px]">
+              <div className="absolute top-[0] rounded-[999px] w-full border border-blue-500 h-[325px] md:h-[600px]">
                 <div className={`${styles.xpIcon} ${styles.xpChat}`}>
                   <Image
                     src="/assets/icon-chat.svg"
@@ -396,7 +389,7 @@ export default function Home() {
                 faster, smarter responses.
               </p>
             </div>
-<div className="relative flex h-[240px] w-full flex-col items-center justify-center rounded-lg md:h-full">
+            <div className="relative flex h-[240px] w-full flex-col items-center justify-center rounded-lg md:h-full">
               <GridPattern
                 style={{ border: "none" }}
                 width={40}
