@@ -1045,7 +1045,7 @@
 
 /* Chat (left) — ends near 12–15% of the arc */
 .xpChat {
-  --to: 5%; 
+  --to: 5%;
   --mid: 3%;
   left: 7%;
   animation: xpTravel var(--dur, 1.8s) ease-out 0.1s forwards;
@@ -1216,8 +1216,12 @@
 
 @media (max-width: 768px) {
   .page {
-    padding: 120px 1.25rem 120px;
+    padding: 50px 1.25rem 0px;
     min-height: calc(100vh - 72px);
+  }
+
+  .headline {
+    font-size: 46px;
   }
 
   .ctaRow {
@@ -1234,8 +1238,24 @@
     margin-top: 160px;
   }
 
+  .howSection {
+    padding: 40px 1rem 0;
+  }
+
   .howGrid {
-    grid-template-columns: 1fr;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+
+  .orbRing {
+    height: 80%;
+  }
+
+  .rapidscreenGrid {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
   }
 
   .rapidscreenHeader {
@@ -1255,12 +1275,36 @@
   .centerStack {
     margin: 8px auto 0;
   }
+
+  .footer {
+    padding: 26px 1rem 0px;
+  }
+
+  .footerBottom {
+    margin-bottom: 20px;
+    display: flex;
+    align-items: center;
+  }
+
+  .rapidscreenTitle,
+  .rapidscreenSubtitle,
+  .footerLogoName,
+  .footerDesc,
+  .footerCol,
+  .footerBottom {
+    text-align: center;
+  }
+
+  .footerWatermark {
+    font-size: 6rem;
+    bottom: 0;
+  }
 }
 
 @media (max-width: 480px) {
-  .page {
+  /* .page {
     padding: 100px 1rem 100px;
-  }
+  } */
 
   .headline {
     gap: 0.5rem;
@@ -1276,10 +1320,6 @@
 
   .howSubheadline {
     font-size: 18px;
-  }
-
-  .howSection {
-    padding: 120px 1rem 0;
   }
 
   .rapidscreenSection {

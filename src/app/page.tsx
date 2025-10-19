@@ -396,7 +396,7 @@ export default function Home() {
                 faster, smarter responses.
               </p>
             </div>
-            <div className="relative flex h-full w-full flex-col items-center justify-center rounded-lg">
+<div className="relative flex h-[240px] w-full flex-col items-center justify-center rounded-lg md:h-full">
               <GridPattern
                 style={{ border: "none" }}
                 width={40}
