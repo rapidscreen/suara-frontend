@@ -23,7 +23,7 @@ export default function OrbAutoPlay() {
       autoPlay
       playsInline
       preload="auto"
-      className={styles.orbVideo}
+      className={`${styles.orbVideo} rounded-[999px]`}
     />
   );
 }

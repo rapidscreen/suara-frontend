@@ -8,7 +8,6 @@ import Image from "next/image";
 import styles from "./page.module.css";
 
 export default function Home() {
-
   return (
     <div className={styles.page}>
       <section className={styles.hero}>
@@ -101,7 +100,9 @@ export default function Home() {
           </p>
           <div className={styles.howGrid}>
             <div className={styles.howCard}>
-              <div className={`${styles.howCardText} sm:mb-[20px] md:mb-[60px]`}>
+              <div
+                className={`${styles.howCardText} sm:mb-[20px] md:mb-[60px]`}
+              >
                 <h3 className={styles.howCardTitle}>Voice Input</h3>
                 <p className={styles.howCardBody}>
                   Capture natural speech across Malay, English, Mandarin, and
@@ -321,8 +322,6 @@ export default function Home() {
                     "[mask-image:linear-gradient(to_bottom_right,transparent,transparent,#1d4ed8a8,transparent,transparent,#1d4ed8a8)] "
                   )}
                 />
-              </div>
-              <div className="absolute top-[0] rounded-[999px] w-full border border-blue-500 h-[325px] md:h-[600px]">
                 <div className={`${styles.xpIcon} ${styles.xpChat}`}>
                   <Image
                     src="/assets/icon-chat.svg"
@@ -331,7 +330,6 @@ export default function Home() {
                     height={26}
                   />
                 </div>
-
                 <div className={`${styles.xpIcon} ${styles.xpWeb}`}>
                   <Image
                     src="/assets/icon-globe.svg"
@@ -340,33 +338,6 @@ export default function Home() {
                     height={26}
                   />
                 </div>
-
-                <div className={`${styles.xpIcon} ${styles.xpPhone}`}>
-                  <Image
-                    src="/assets/icon-phone.svg"
-                    alt="Phone"
-                    width={24}
-                    height={24}
-                  />
-                </div>
-                <div className={`${styles.xpIcon} ${styles.xpChat}`}>
-                  <Image
-                    src="/assets/icon-chat.svg"
-                    alt="Chat"
-                    width={26}
-                    height={26}
-                  />
-                </div>
-
-                <div className={`${styles.xpIcon} ${styles.xpWeb}`}>
-                  <Image
-                    src="/assets/icon-globe.svg"
-                    alt="Web"
-                    width={26}
-                    height={26}
-                  />
-                </div>
-
                 <div className={`${styles.xpIcon} ${styles.xpPhone}`}>
                   <Image
                     src="/assets/icon-phone.svg"
@@ -376,7 +347,9 @@ export default function Home() {
                   />
                 </div>
               </div>
-              <div className="absolute top-[20%] left-[10%] rounded-[999px] w-[80%] border border-[#72A2F9] h-[600px]"></div>
+              <div className="absolute top-[0] rounded-[999px] w-full border border-blue-500 min-h-lvh"></div>
+
+              <div className="absolute top-[20%] left-[10%] rounded-[999px] w-[80%] border border-[#72A2F9] min-h-lvh"></div>
             </div>
           </div>
           <div className={styles.rapidscreenCard}>
@@ -389,7 +362,9 @@ export default function Home() {
                 faster, smarter responses.
               </p>
             </div>
-            <div className="relative flex h-[240px] w-full flex-col items-center justify-center rounded-lg md:h-full">
+            <div
+              className={`${styles.aiStage} relative flex h-[240px] w-full flex-col items-center justify-center rounded-lg md:h-full`}
+            >
               <GridPattern
                 style={{ border: "none" }}
                 width={40}

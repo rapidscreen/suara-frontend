@@ -1035,38 +1035,40 @@
     0 14px 28px rgba(37, 99, 235, .28),
     inset 0 1px 0 rgba(255, 255, 255, .6);
   /* motion-path settings */
-  offset-path: path("M30 230 A400 400 0 0 1 830 230");
-  offset-rotate: 0deg;
+  /* offset-path: path("M30 230 A400 400 0 0 1 830 230"); */
+  /* offset-rotate: 0deg; */
   /* Start offscreen left on the path */
-  offset-distance: 0%;
-  opacity: 0;
-  animation-fill-mode: forwards;
+  /* offset-distance: 0%; */
+  opacity: 1;
+  /* animation-fill-mode: forwards; */
+  z-index: 10;
 }
 
 /* Chat (left) — ends near 12–15% of the arc */
 .xpChat {
   --to: 5%;
   --mid: 3%;
-  left: 7%;
-  animation: xpTravel var(--dur, 1.8s) ease-out 0.1s forwards;
+  left: 4%;
+  top: 25%;
+  /* animation: xpTravel var(--dur, 1.8s) ease-out 0.1s forwards; */
 }
 
 /* Web (center) — ends at 50% */
 .xpWeb {
   --to: 50%;
   --mid: 50%;
-  left: -20%;
-  top: 33%;
-  animation: xpTravel var(--dur, 2.2s) ease-out 0.2s forwards;
+  left: 45%;
+  top: -12%;
+  /* animation: xpTravel var(--dur, 2.2s) ease-out 0.2s forwards; */
 }
 
 /* Phone (right) — ends at ~86% */
 .xpPhone {
   --to: 86%;
   --mid: 80%;
-  left: -38%;
-  top: 18%;
-  animation: xpTravel var(--dur, 2.4s) ease-out 0.25s forwards;
+  right: 4%;
+  top: 25%;
+  /* animation: xpTravel var(--dur, 2.4s) ease-out 0.25s forwards; */
 }
 
 @keyframes xpTravel {
@@ -1089,9 +1091,9 @@
 }
 
 /* Center the icons vertically on the motion path */
-.xpIcon {
+/* .xpIcon {
   transform: translate(-50%, -50%);
-}
+} */
 
 
 
@@ -1191,9 +1193,7 @@
   .howGrid {
     grid-template-columns: repeat(2, minmax(0, 1fr));
   }
-}
 
-@media (max-width: 900px) {
   .centerStack {
     width: 260px;
     height: 260px;
@@ -1202,9 +1202,7 @@
   .bubble {
     font-size: 14px;
   }
-}
 
-@media (max-width: 768px) {
   .page {
     padding: 50px 1.25rem 0px;
     min-height: calc(100vh - 72px);
@@ -1214,14 +1212,15 @@
     font-size: 46px;
   }
 
-  .bTopRight{
+  .bTopRight {
     right: -16px;
   }
-  .bBottomRight{
+
+  .bBottomRight {
     right: -23px;
   }
 
-  .bBottomLeft{
+  .bBottomLeft {
     left: -23px;
   }
 
@@ -1273,8 +1272,14 @@
     align-items: center;
   }
 
+  .rapidscreenCard {
+    width: 100%;
+    max-width: 400px;
+  }
+
   .rapidscreenHeader {
     flex-direction: column;
+    align-items: center;
   }
 
   .voiceStage {
@@ -1291,17 +1296,15 @@
     margin: 8px auto 0;
   }
 
-  .xpStage {
-    height: 180px;
+  .xpStage, .sttStage, .mlStage, .aiStage {
+    height: 280px;
   }
 
   .xpIcon {
     --size: 56px;
   }
 
-  .xpChat {
-    /* --to: 12%;
-    --mid: 8%; */
+  /* .xpChat {
     left: 9%;
     top: -25%;
   }
@@ -1314,7 +1317,7 @@
   .xpPhone{
     top: 10%;
     left: -153%;
-  }
+  } */
 
   .footer {
     padding: 26px 1rem 0px;
@@ -1383,6 +1386,8 @@
     bottom: 0;
   }
 }
+
+@media (max-width: 390px) {}
 
 /* Respect user motion preference */
 @media (prefers-reduced-motion: reduce) {
