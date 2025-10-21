@@ -968,23 +968,6 @@
   z-index: 1;
 }
 
-/* responsive */
-@media (max-width: 900px) {
-  .footerInner {
-    grid-template-columns: 1fr;
-    gap: 32px;
-  }
-
-  .footerCols {
-    justify-items: start;
-  }
-
-  .footerBottom {
-    flex-direction: column;
-    align-items: flex-start;
-    gap: 14px;
-  }
-}
 
 
 /* ---------- Cross-Platform Access ---------- */
@@ -1297,7 +1280,7 @@
   }
 
   .xpStage, .sttStage, .mlStage, .aiStage {
-    height: 280px;
+    height: 260px;
   }
 
   .xpIcon {
@@ -1327,6 +1310,36 @@
     margin-bottom: 20px;
     display: flex;
     align-items: center;
+  }
+
+    .footerInner {
+   display: flex;
+   flex-direction: column;
+   align-items: center;
+    gap: 32px;
+  }
+
+  .footerCols {
+    justify-items: start;
+  }
+
+  .footerBottom {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 14px;
+  }  .footerInner {
+    grid-template-columns: 1fr;
+    gap: 32px;
+  }
+
+  .footerCols, .footerDesc {
+    justify-items: center;
+  }
+
+  .footerBottom {
+    flex-direction: column;
+    align-items: center;
+    gap: 14px;
   }
 
   .rapidscreenTitle,
