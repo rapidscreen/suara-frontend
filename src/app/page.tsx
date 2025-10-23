@@ -89,7 +89,7 @@ export default function Home() {
         </div>
       </section>
 
-      <section className={styles.howSection}>
+      <section id="how" className={styles.howSection}>
         <div className={styles.howContent}>
           <h2 className={styles.howHeadline}>
             How <span>Suara</span> Works
@@ -193,7 +193,7 @@ export default function Home() {
           </div>
         </div>
       </section>
-      <section className={styles.rapidscreenSection}>
+      <section id="features" className={styles.rapidscreenSection}>
         <div className={styles.rapidscreenHeader}>
           <h2 className={styles.rapidscreenTitle}>
             Suara <span className={styles.rapidscreenHighlight}>×</span>{" "}
@@ -374,10 +374,10 @@ export default function Home() {
                 )}
               />
               <div className="relative h-full w-full">
-                <div className="absolute left-[35%] top-0 w-max font-semibold text-3xl text-[#3E80F7] bg-white shadow-[inset_0_1px_6px_#2563EB1A] p-4 rounded-xl">
+                <div className="absolute left-[35%] top-[-12%] w-max font-semibold text-3xl text-[#3E80F7] bg-white shadow-[inset_0_1px_6px_#2563EB1A] p-4 rounded-xl">
                   Suara
                 </div>
-                <div className="flex flex-row gap-3 absolute left-[22%] bottom-[43%]">
+                <div className="flex flex-row gap-5 absolute left-[22%] bottom-[45%]">
                   <div className=" w-max font-semibold text-3xl text-[#3E80F7] bg-white shadow-[inset_0_1px_6px_#2563EB1A] p-2 rounded-xl">
                     <Image
                       src="/assets/chatgpt.png"
@@ -429,16 +429,16 @@ export default function Home() {
               <h4 className={styles.footerColTitle}>Resources</h4>
               <ul className={styles.footerLinks}>
                 <li>
-                  <a href="/about">About</a>
+                  <a href="#about">About</a>
                 </li>
                 <li>
-                  <a href="/features">Features</a>
+                  <a href="#features">Features</a>
                 </li>
                 <li>
                   <a href="#how">How It Works</a>
                 </li>
                 <li>
-                  <a href="/contact">Contact</a>
+                  <a href="#contact">Contact</a>
                 </li>
               </ul>
             </div>

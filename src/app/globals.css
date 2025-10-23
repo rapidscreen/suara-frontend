@@ -228,7 +228,7 @@ main {
   justify-content: center;
 }
 
-[role="log"] > div[style] {
+[role="log"]>div[style] {
   overflow: hidden !important;
 }
 
@@ -365,7 +365,9 @@ a {
 }
 
 
-*, *::before, *::after {
+*,
+*::before,
+*::after {
   border-color: hsl(var(--border));
 }
 

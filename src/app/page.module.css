@@ -948,7 +948,7 @@
   z-index: 0;
   font-weight: 800;
   letter-spacing: -0.02em;
-  font-size: 22rem;
+  font-size: 20rem;
   line-height: 0.9;
   text-align: center;
   color: rgba(37, 99, 235, .18);
@@ -1096,22 +1096,7 @@
     width: 56px;
     height: 56px;
   }
-}
 
-@media (max-width: 640px) {
-  .sttStage {
-    height: 240px;
-  }
-
-  /* .sttPillLeft,
-  .sttPillRight {
-    width: 130px;
-    height: 200px;
-  } */
-}
-
-/* responsive adjustments */
-@media (max-width: 900px) {
   .mlStage {
     height: 280px;
   }
@@ -1127,6 +1112,17 @@
 }
 
 @media (max-width: 640px) {
+
+  .sttStage {
+    height: 240px;
+  }
+
+  .sttPillLeft,
+  .sttPillRight {
+    width: 130px;
+    height: 200px;
+  }
+
   .mlStage {
     height: 260px;
   }
@@ -1168,7 +1164,7 @@
 /* =========================
    MEDIA QUERIES
 ========================= */
-@media (max-width: 1024px) {
+@media (max-width: 1240px) {
   .waveSection {
     margin-top: 200px;
   }
@@ -1214,7 +1210,7 @@
 
   .primaryCta,
   .secondaryCta {
-    width: 100%;
+    width: 60%;
   }
 
   .waveSection {
@@ -1237,9 +1233,9 @@
     align-items: center;
   }
 
-  .orbRing {
+  /* .orbRing {
     height: 80%;
-  }
+  } */
 
   .conversationWave {
     min-height: 300px;
@@ -1247,6 +1243,10 @@
 
   .conversationWrap {
     bottom: 20%;
+  }
+
+   .rapidscreenSection {
+    padding: 100px 1rem 0;
   }
 
   .rapidscreenGrid {
@@ -1279,7 +1279,10 @@
     margin: 8px auto 0;
   }
 
-  .xpStage, .sttStage, .mlStage, .aiStage {
+  .xpStage,
+  .sttStage,
+  .mlStage,
+  .aiStage {
     height: 260px;
   }
 
@@ -1312,10 +1315,10 @@
     align-items: center;
   }
 
-    .footerInner {
-   display: flex;
-   flex-direction: column;
-   align-items: center;
+  .footerInner {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
     gap: 32px;
   }
 
@@ -1327,12 +1330,15 @@
     flex-direction: column;
     align-items: flex-start;
     gap: 14px;
-  }  .footerInner {
+  }
+
+  .footerInner {
     grid-template-columns: 1fr;
     gap: 32px;
   }
 
-  .footerCols, .footerDesc {
+  .footerCols,
+  .footerDesc {
     justify-items: center;
   }
 
@@ -1374,17 +1380,14 @@
     padding: 28px;
   }
 
-  .orbRing {
+  /* .orbRing {
     height: 70%;
-  }
+  } */
 
   .howSubheadline {
     font-size: 18px;
   }
 
-  .rapidscreenSection {
-    padding: 100px 1rem 0;
-  }
 
   .rapidscreenTitle {
     font-size: 38px;
